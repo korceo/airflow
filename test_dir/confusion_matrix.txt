@@ -1,0 +1,30 @@
+Classes: 0, 1, 2
+Confusion matrix:
+10 0 0
+0 9 0
+0 0 11
+
+Classes: 0, 1, 2
+Confusion matrix:
+10 0 0
+0 9 0
+0 0 11
+
+Classes: 0, 1, 2
+Confusion matrix:
+10 0 0
+0 9 0
+0 0 11
+
+Classes: 0, 1, 2
+Confusion matrix:
+10 0 0
+0 9 0
+0 0 11
+
+Classes: 0, 1, 2
+Confusion matrix:
+10 0 0
+0 9 0
+0 0 11
+
