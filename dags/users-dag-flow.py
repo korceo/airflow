@@ -1,5 +1,5 @@
-from airflow import DAG
-from airflow.operators.python import PythonOperator
+from __future__ import annotations
+from airflow.decorators import task, dag
 from datetime import datetime
 import os, csv, requests
 
@@ -16,9 +16,10 @@ columns = ['gender', 'first (name)', 'last (name)', 'city',	'country',	'latitude
 
 default_args = {
     'owner' : 'Fyodor',
-    'start_date': datetime(2025, 10, 14)
+    'start_date': datetime(2025, 10, 15)
 }
 
+@task
 def fetch_and_append():
     os.makedirs(os.path.dirname(path), exist_ok=True)
     new_file = not os.path.exists(path)
@@ -39,11 +40,15 @@ def fetch_and_append():
         if new_file: w.writeheader()
         w.writerow(row)
 
-with DAG(
-    dag_id="users_dag",
-    start_date=datetime(2025, 10, 14),
+
+@dag(
+    dag_id = 'users_taskflow',
     default_args = default_args,
     schedule="*/10 * * * *",
     catchup=False,
-) as dag:
-    PythonOperator(task_id="fetch_and_append", python_callable=fetch_and_append)
+)
+
+def users_taskflow():
+    fetch_and_append()
+
+dag = users_taskflow()
